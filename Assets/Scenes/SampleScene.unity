@@ -305,12 +305,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3a6074a000d98f41b8f2b6d91fa6cf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acceleration: 10
+  acceleration: 15
   gravity: 20
-  steering: 15
+  steering: 10
+  drifting: 15
   sphere: {fileID: 777423687}
   spriteVisual: {fileID: 1066034791}
-  testing: 0
+  testing: 1
 --- !u!1 &195367353
 GameObject:
   m_ObjectHideFlags: 0
@@ -552,7 +553,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4034805409452286, guid: deca318a64877134daafc2697ba25555, type: 2}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4034805409452286, guid: deca318a64877134daafc2697ba25555, type: 2}
       propertyPath: m_LocalRotation.z
@@ -560,7 +561,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4034805409452286, guid: deca318a64877134daafc2697ba25555, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4034805409452286, guid: deca318a64877134daafc2697ba25555, type: 2}
       propertyPath: m_RootOrder
@@ -618,6 +619,10 @@ Prefab:
         type: 2}
       propertyPath: field of view
       value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 4034805409452286, guid: deca318a64877134daafc2697ba25555, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: deca318a64877134daafc2697ba25555, type: 2}
@@ -736,7 +741,7 @@ MeshCollider:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 676235514}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 9b6d2d0d24a1f0a4e97a35491c3f3177, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 3

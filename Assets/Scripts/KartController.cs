@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class KartController : MonoBehaviour {
 
-	[SerializeField] float acceleration, gravity, steering;
+	[SerializeField] float acceleration, gravity, steering, drifting;
 	[SerializeField] Rigidbody sphere;
 	[SerializeField] Animator spriteVisual;
 	public bool testing;
@@ -61,6 +61,14 @@ public class KartController : MonoBehaviour {
 
 	void Steer(int dir, float amount)
 	{
-		rotate = (steering * dir) * amount;
+        if (Input.GetKey(KeyCode.UpArrow) || (Input.GetButton("Right Shoulder")))
+        {
+            rotate = (drifting * dir) * amount;
+        }
+		else
+		{
+			rotate = (steering * dir) * amount;
+
+		}
 	}
 }
