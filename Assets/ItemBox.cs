@@ -2,15 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemBox : MonoBehaviour {
+public class ItemBox : MonoBehaviour
+{
+    public int randomNum;
+    public int maxNumber;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "Player")
+        {
+            randomNum = Random.Range(1, maxNumber);
+            other.gameObject.GetComponentInParent<ItemManager>().itemNo = randomNum;
+            other.gameObject.GetComponentInParent<ItemManager>().GivePlayerItem();
+        }
+    }
 }
