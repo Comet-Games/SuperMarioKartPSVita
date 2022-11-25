@@ -38,7 +38,7 @@ public class Item : MonoBehaviour {
 	void Update () {
         transform.position = (sphere.transform.position - offset);//Follow sphere
 
-		if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown("Left Shoulder"))
+		if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetButtonDown("Left Shoulder"))
 		{
 			UseItem();
 		}

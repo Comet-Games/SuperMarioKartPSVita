@@ -8,11 +8,15 @@ public class GreenShell : MonoBehaviour {
 	public int hits;
 	public bool isBouncing;
 	public float bounce;
+    public AudioClip bounceSound;
+    AudioSource audioSource;
 
-	// Use this for initialization
-	void Awake () 
+    // Use this for initialization
+    void Awake () 
 	{
 		rb = GetComponent<Rigidbody>();
+		audioSource = GetComponent<AudioSource>();
+
 		//rb.AddForce(0, 0, Speed, ForceMode.Impulse);
 	}
 
@@ -36,6 +40,7 @@ public class GreenShell : MonoBehaviour {
 		{
 			Destroy(gameObject);
 		}
-		rb.AddForce(collision.contacts[0].normal * bounce);
+        audioSource.PlayOneShot(bounceSound);
+        rb.AddForce(collision.contacts[0].normal * bounce);
 	}
 }
