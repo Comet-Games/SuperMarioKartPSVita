@@ -9,6 +9,7 @@ public class LapCounter : MonoBehaviour
 	[SerializeField] private MapManager mapManager;
 	public Text lapText;
 	public Text timerText;
+	public GameObject endScreen;
 	public float lapTime = 0f;
 	// Use this for initialization
 	void Start()
@@ -23,7 +24,8 @@ public class LapCounter : MonoBehaviour
 
         if (mapManager.laps != mapManager.lapAmount + 1)
 		{
-			if (mapManager.laps == 0)
+            endScreen.SetActive(false);
+            if (mapManager.laps == 0)
 			{
 				lapText.text = "Start Race";
 			}
@@ -33,7 +35,7 @@ public class LapCounter : MonoBehaviour
 		else
 		{
 			lapText.text = "Race Over";
-            Time.timeScale = 0;
+			endScreen.SetActive(true);
         }
 	}
 

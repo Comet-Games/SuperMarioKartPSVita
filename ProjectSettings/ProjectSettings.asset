@@ -256,7 +256,14 @@ PlayerSettings:
     banner: {fileID: 0}
   androidGamepadSupportLevel: 0
   resolutionDialogBanner: {fileID: 0}
-  m_BuildTargetIcons: []
+  m_BuildTargetIcons:
+  - m_BuildTarget: PSP2
+    m_Icons:
+    - serializedVersion: 2
+      m_Icon: {fileID: 2800000, guid: cd7d7e791fdc83c4e8cce67d48d983d0, type: 3}
+      m_Width: 128
+      m_Height: 128
+      m_Kind: 0
   m_BuildTargetPlatformIcons: []
   m_BuildTargetBatching:
   - m_BuildTarget: Standalone
@@ -519,7 +526,7 @@ PlayerSettings:
   psp2NPCommsSig: 
   psp2ParamSfxPath: 
   psp2ManualPath: 
-  psp2LiveAreaGatePath: 
+  psp2LiveAreaGatePath: Assets/Gate.png
   psp2LiveAreaBackroundPath: 
   psp2LiveAreaPath: 
   psp2LiveAreaTrialPath: 
@@ -543,8 +550,8 @@ PlayerSettings:
   psp2ShortTitle: Mario Kart
   psp2ContentID: IV0000-SMKV54321_00-0123456789ABCDEF
   psp2Category: 0
-  psp2MasterVersion: 01.00
-  psp2AppVersion: 01.00
+  psp2MasterVersion: 01.10
+  psp2AppVersion: 01.10
   psp2TVBootMode: 0
   psp2EnterButtonAssignment: 2
   psp2TVDisableEmu: 0
