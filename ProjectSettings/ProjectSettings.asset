@@ -550,8 +550,8 @@ PlayerSettings:
   psp2ShortTitle: Mario Kart
   psp2ContentID: IV0000-SMKV54321_00-0123456789ABCDEF
   psp2Category: 0
-  psp2MasterVersion: 01.10
-  psp2AppVersion: 01.10
+  psp2MasterVersion: 01.15
+  psp2AppVersion: 01.15
   psp2TVBootMode: 0
   psp2EnterButtonAssignment: 2
   psp2TVDisableEmu: 0

@@ -550,7 +550,7 @@ MonoBehaviour:
   acceleration: 15
   steering: 15
   gravity: 20
-  boost: -10000
+  boost: -25000
   testing: 1
   grounded: 0
 --- !u!1 &186379980
