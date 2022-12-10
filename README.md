@@ -1,2 +1,5 @@
 # SuperMarioKartPSVita
- A Super Mario Kart for the NES Re-Created for the PS Vita
+ A Super Mario Kart style game for the PS Vita
+ 
+ # Features
+ - Time Trials
