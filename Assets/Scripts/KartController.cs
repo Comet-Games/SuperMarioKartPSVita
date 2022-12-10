@@ -7,6 +7,7 @@ public class KartController : MonoBehaviour
     [SerializeField] float driftingf, groundCheckHeight;
     [SerializeField] Rigidbody sphere;
     [SerializeField] Animator spriteVisual;
+    [SerializeField] AudioSource audioSource;
 
     [Header("Kart Stuff")]
     [SerializeField] private float speed, currentSpeed;
@@ -14,8 +15,16 @@ public class KartController : MonoBehaviour
     private int driftDir;
     public float driftPower;
     public int driftMode = 0;
+    public int jumpAmount;
     public bool first, second, third;
     public Color c;
+
+    public float driftTimer;
+    public float requiredDriftTime = 3f;
+    [Header("Sounds")]
+    public AudioClip idleEngine;
+    public AudioClip engine1;
+    public AudioClip engine2;
 
     [Header("Bools")]
     public bool drifting;
@@ -30,13 +39,20 @@ public class KartController : MonoBehaviour
     public bool testing;
     public bool grounded;
 
+    void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     // Update is called once per frame
     void Update()
     {
+        audioSource.Play();
+        DriftCheck();
         transform.position = sphere.transform.position;//Follow sphere
         #region - Acceleration -
         //Acceleration
-        if (Input.GetButton("Fire1") || (Input.GetButton("Cross")))
+        if (Input.GetButton("Fire1") || (Input.GetButton("Cross")) && grounded)
         {
             speed = acceleration;
         }
@@ -72,9 +88,10 @@ public class KartController : MonoBehaviour
         #endregion
 
         #region - Drifting -
-        if ((Input.GetButtonDown("Right Shoulder") || Input.GetKey(KeyCode.UpArrow)) && !drifting && ((Input.GetAxis("Left Stick Horizontal") != 0) || (Input.GetAxis("Horizontal")) != 0))
+        if ((Input.GetButton("Right Shoulder") || Input.GetKey(KeyCode.UpArrow)) && !drifting && ((Input.GetAxis("Left Stick Horizontal") != 0) || (Input.GetAxis("Horizontal")) != 0))
         {
             drifting = true;
+            sphere.AddForce(Vector3.up * jumpAmount, ForceMode.Impulse);
             if (testing)
             {
                 driftDir = Input.GetAxis("Horizontal") > 0 ? 1 : -1;
@@ -83,6 +100,10 @@ public class KartController : MonoBehaviour
             {
                 driftDir = Input.GetAxis("Left Stick Horizontal") > 0 ? 1 : -1;
             }
+        }
+        else if((Input.GetButtonDown("Right Shoulder") || Input.GetKeyDown(KeyCode.UpArrow)) && !drifting)
+        {
+            sphere.AddForce(Vector3.up * jumpAmount, ForceMode.Impulse);
         }
 
         if (drifting)
@@ -106,21 +127,34 @@ public class KartController : MonoBehaviour
 
         }
 
-        if (Input.GetButtonUp("Right Shoulder") || Input.GetKeyUp(KeyCode.UpArrow) && drifting && acceleration == 15)
+        if (Input.GetButtonUp("Right Shoulder") || Input.GetKeyUp(KeyCode.UpArrow) && drifting && grounded)
         {
-            StartCoroutine(Boost(0.2f, boost));
+            if (driftTimer > requiredDriftTime)
+            {
+                StartBoost(0, boost);
+            }
+            driftTimer = 0;
+            drifting = false;// (Boosting goes here)
+        }
+        if (Input.GetButtonUp("Right Shoulder") || Input.GetKeyUp(KeyCode.UpArrow) && drifting && !grounded)
+        {
+            if (driftTimer > requiredDriftTime)
+            {
+                StartBoost(0, boost);
+            }
+            driftTimer = 0;
             drifting = false;// (Boosting goes here)
         }
         #endregion
 
         if (!grounded)
         {
-            gravity = 1;
-            acceleration = 1;
+            //gravity = 1;
+            //acceleration = 1;
         }
         if (grounded)
         {
-            gravity = 20;
+            //gravity = 20;
             acceleration = 15;
         }
     }
@@ -134,6 +168,14 @@ public class KartController : MonoBehaviour
         sphere.AddForce(Vector3.down * gravity, ForceMode.Acceleration);
 
         transform.eulerAngles = Vector3.Lerp(transform.eulerAngles, new Vector3(0f, transform.eulerAngles.y + currentRotation, 0f), 5f * Time.deltaTime);
+    }
+
+    void DriftCheck()
+    {
+        if(drifting)
+        {
+            driftTimer += Time.deltaTime;
+        }
     }
 
     void Steer(int dir, float amount)

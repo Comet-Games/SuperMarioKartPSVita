@@ -32,6 +32,7 @@ public class Item : MonoBehaviour {
     void Awake()
 	{
 		Kart = GetComponentInParent<KartController>();
+        UpdateUI();
 	}
 	
 	// Update is called once per frame
